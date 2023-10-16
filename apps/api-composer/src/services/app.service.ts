@@ -7,4 +7,13 @@ export class AppService {
   async getUsers(email) {
     return this.userRepository.getUsers(email);
   }
+
+  async register(body: { email: string; password: string }) {
+    const { email, password } = body;
+    await this.userRepository.create(email, password);
+  }
+
+  async login(credentials) {
+    return this.userRepository.validate(credentials);
+  }
 }

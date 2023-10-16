@@ -11,10 +11,7 @@ export class EncryptorService {
   }
 
   encryptBody(body: string): string {
-    return CryptoJS.AES.encrypt(
-      JSON.stringify(body),
-      this.encryptKey,
-    ).toString();
+    return CryptoJS.AES.encrypt(body, this.encryptKey).toString();
   }
 
   decryptBody(body: any) {
