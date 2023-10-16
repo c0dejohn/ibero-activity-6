@@ -46,19 +46,25 @@ export class UsersRepository {
       email,
       password,
     };
-    const result = await axios.post(url, body, { headers }).catch((error) => {
-      this.logger.error(`RECEIVED_API_USER_REGISTER_ERROR_DESC: ${error}`);
-      throw new HttpException('get user error', 206);
-    });
-
-    this.logger.log('RECEIVED_API_USER_REGISTER_OK', result.data);
-    return result.data;
+    return await axios
+      .post(url, body, { headers })
+      .catch((error) => {
+        this.logger.error(`RECEIVED_API_USER_REGISTER_ERROR_DESC: ${error}`);
+        throw new HttpException(
+          'An error occurred while creating the user',
+          400,
+        );
+      })
+      .then(() => {
+        this.logger.log('RECEIVED_API_USER_REGISTER_OK');
+        return { msg: 'User created' };
+      });
   }
 
   private static generateHeaders(email: string, token?: string) {
     return {
       'X-Invoker-User': email,
-      authorization: `Bearer ${token}`,
+      authorization: token,
     };
   }
 }

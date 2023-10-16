@@ -14,6 +14,7 @@ export class AuthenticationService extends PassportStrategy(Strategy) {
   }
 
   async validate(payload: any): Promise<any> {
+    console.log('@PAYLOAD', payload);
     if (!payload) throw new HttpException('Invalid User', 401);
     return true;
   }

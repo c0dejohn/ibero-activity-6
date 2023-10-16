@@ -8,7 +8,7 @@
   "scripts": {
     "build": "nest build",
     "format": "prettier --write \"apps/**/*.ts\" \"libs/**/*.ts\"",
-    "start": "nest start && nest start users",
+    "start": "nest start & nest start users & nest start characters & nest start movies",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/apps/api-composer/main",
@@ -32,6 +32,7 @@
     "bcrypt": "^5.1.1",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.0",
+    "concurrently": "^8.2.1",
     "crypto": "^1.0.1",
     "crypto-js": "^4.1.1",
     "fs": "^0.0.1-security",

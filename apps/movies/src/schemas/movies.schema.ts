@@ -2,7 +2,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { Document } from 'mongoose';
 
 @Schema({ timestamps: true })
-export class MoviesRepository {
+export class Movie {
   _id: mongoose.Schema.Types.ObjectId;
 
   @Prop({ required: true, unique: true })
@@ -17,6 +17,6 @@ export class MoviesRepository {
   characters_associated: [string];
 }
 
-export type MoviesRepositoryDocument = MoviesRepository & Document;
+export type MovieDocument = Movie & Document;
 
-export const MoviesSchema = SchemaFactory.createForClass(MoviesRepository);
+export const MovieSchema = SchemaFactory.createForClass(Movie);
