@@ -49,10 +49,14 @@ export class UserRepository {
     await this.UsersModel.create({
       username: email.toLowerCase(),
       password: this.encryptor.encryptBody(password),
-    }).catch((err) => {
-      this.logger.error(err);
-      throw new HttpException('user already exist', 400);
-    });
+    })
+      .catch((err) => {
+        this.logger.error(err);
+        throw new HttpException('user already exist', 400);
+      })
+      .then((result) => {
+        return { msg: 'User created successfully' };
+      });
   }
 
   async validateUser(email: string, pass: string) {

@@ -9,6 +9,8 @@ import { EncryptorService } from '../utils/encryptor.service';
 import { JwtModule } from '@nestjs/jwt';
 import { AuthService } from './auth/auth.service';
 import { Token, TokenSchema } from './schemas/token.schema';
+import { EmailHanlderService } from './users/service/email.hanlder.service';
+import { EmailHandlerRepository } from './repositories/email-handler.repository';
 
 @Module({
   imports: [
@@ -50,6 +52,8 @@ import { Token, TokenSchema } from './schemas/token.schema';
     EncryptorService,
     AuthService,
     Object,
+    EmailHanlderService,
+    EmailHandlerRepository,
   ],
   exports: [AuthService],
 })
