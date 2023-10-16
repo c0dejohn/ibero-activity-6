@@ -1,12 +1,12 @@
 import { Controller, Get } from '@nestjs/common';
-import { CharactersService } from './characters.service';
+import { CharactersService } from '../services/characters.service';
 
-@Controller()
+@Controller('characters')
 export class CharactersController {
   constructor(private readonly charactersService: CharactersService) {}
 
   @Get()
-  getHello(): string {
-    return this.charactersService.getHello();
+  async getAll() {
+    return this.charactersService.getCharacters();
   }
 }

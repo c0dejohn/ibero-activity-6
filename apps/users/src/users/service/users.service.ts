@@ -1,12 +1,13 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { UserRepository } from '../../repositories/user.repository';
-import { EncryptorService } from '../../../utils/encryptor.service';
+import { EmailHanlderService } from './email.hanlder.service';
 
 @Injectable()
 export class UsersService {
+  private logger = new Logger(UsersService.name);
   constructor(
     private readonly userRepository: UserRepository,
-    private readonly encryptor: EncryptorService,
+    private readonly emailHandler: EmailHanlderService,
   ) {}
 
   async getUser(email: string): Promise<any> {
@@ -14,7 +15,13 @@ export class UsersService {
   }
 
   async createUser(email, password) {
-    const encryptedPass = this.encryptor.encryptBody(password);
-    return this.userRepository.create(email, encryptedPass);
+    return this.userRepository.create(email, password).then(() => {
+      this.logger.log('Sending welcome email...');
+      this.emailHandler.dispatch(email);
+    });
+  }
+
+  async validate(email, password) {
+    return this.userRepository.validateUser(email, password);
   }
 }
