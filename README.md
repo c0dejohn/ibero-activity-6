@@ -24,7 +24,5 @@
 ```
 
 
-### prueba de escritorio
-https://www.loom.com/share/bb312faf60c34d23981af559a427a35c?sid=2b38052f-017e-4b77-baa4-02c2a9e69aff
 
 
